@@ -1,1 +1,3 @@
-# ansible-ws-inventory-plugin
+# Ansible Collection - ws.ws
+
+Documentation for the collection.
