@@ -1,0 +1,15 @@
+{
+  "production": {
+    "LOG_LEVEL": "DEBUG",
+    "DB_DRIVER": "filesystem",
+    "DB_OPTS": {
+      "file": "/tmp/inventory.json"
+    }
+  },
+  "x": {
+    "DB_DRIVER": "mongodb",
+    "DB_OPTS": {
+      "url": "mongodb://root:root@127.0.0.1:27017"
+    }
+  }
+}
