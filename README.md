@@ -78,6 +78,14 @@ Webserver Source code is in the [http-server-api/](./http-server-api) directory.
 
 Application wrapped in Container Image format, but it can be runs a system wide, with [systemd](https://github.com/systemd/systemd) or [sysvinit](https://wiki.debian.org/Debate/initsystem/sysvinit) etc.
 
+## Pull Docker Image
+
+```
+docker pull augustoliks/ws-inventory:latest
+```
+
+## Configuration 
+
 Source code was made in Python. The configuration app, using a library [dynaconf](https://github.com/rochacbruno/dynaconf), for provides multiple formats to configure properties of project. For default, configuration was made in JSON file format, but it could be made from any other source and format compatible with a configuration library. 
 
 ```json
@@ -113,8 +121,8 @@ Source code was made in Python. The configuration app, using a library [dynaconf
 - `DB_DRIVER`: Persistence Tecnology. This option choosed, change properties of `DB_OPTS` properties. Technologies available: `mongodb`, `filesystem`
 - `DB_OPTS`: Properties access Persist Layer:
 
->  - mongodb:
->    - `url`: URL with basic-auth to access mongodb instance
+  - mongodb:
+    - `url`: URL with basic-auth to access mongodb instance
 
->  - filesystem: 
->    - `file`: Path of file which will be used with database.
+  - filesystem: 
+    - `file`: Path of file which will be used with database.
