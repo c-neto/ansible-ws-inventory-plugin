@@ -12,12 +12,20 @@ jobs:
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      
+      - name: check version
+        run: echo $VERSION
 
-      - run: sudo apt update -y
-      - run: sudo apt install python3-virtualenv make -y
+      - name: update repos
+        run: sudo apt update -y
+
+      - name: install build deps
+        run: sudo apt install python3-virtualenv make tree -y
+
+      - run: tree .
 
       - name: "add version to galaxy colection"
-        run: sed -i -e "s/{{ TAG-VERSION }}/$VERSION/g" ansible-plugin/ws/galaxy.yml
+        run: sed -i -e "s/{{ TAG-VERSION }}/$VERSION/g" ./ansible-plugin/ws/galaxy.yml
 
       - name: "check galaxy colection"
         run: cat ansible-plugin/ws/galaxy.yml
