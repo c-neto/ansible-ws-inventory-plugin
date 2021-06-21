@@ -3,7 +3,7 @@
   remote_user: augustoliks
   become_user: augustoliks
   become: yes
-  gather_facts: False
+  gather_facts: False 
 
   tasks:
     - ansible.builtin.debug:
