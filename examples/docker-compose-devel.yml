@@ -10,8 +10,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
       - ws-inventory:/data/
-    # ports:
-    #   - 27017:27017
+    ports:
+      - 27017:27017
 
   http-server-api:
     depends_on: 
