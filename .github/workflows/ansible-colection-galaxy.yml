@@ -14,9 +14,6 @@ jobs:
       - name: Get the version
         id: get_version
         run: echo $GITHUB_REF - ${GITHUB_REF/refs\/tags\//}
-      
-      - name: check tag version
-        run: echo $TAG_VERSION
 
       - name: update repos
         run: sudo apt update -y
@@ -24,7 +21,7 @@ jobs:
       - name: install build deps
         run: sudo apt install python3-virtualenv make tree -y
 
-      - run: ls -R
+      - run: tree .
 
       - name: "add version to galaxy colection"
         run: sed -i -e "s/{{ TAG-VERSION }}/${GITHUB_REF/refs\/tags\//}/g" ./ansible-plugin/ws/galaxy.yml
