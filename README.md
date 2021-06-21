@@ -1,4 +1,5 @@
 [![Build Dockerfile](https://github.com/augustoliks/ansible-ws-inventory-plugin/actions/workflows/docker-http-server.yml/badge.svg?branch=main)](https://github.com/augustoliks/ansible-ws-inventory-plugin/actions/workflows/docker-http-server.yml)
+[![Build Ansible Collection](https://github.com/augustoliks/ansible-ws-inventory-plugin/actions/workflows/ansible-colection-galaxy.yml/badge.svg)](https://github.com/augustoliks/ansible-ws-inventory-plugin/actions/workflows/ansible-colection-galaxy.yml)
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/augustoliks/ws-inventory.svg)](https://hub.docker.com/r/augustoliks/ws-inventory/)
 [![augustoliks/ws-inventory](https://img.shields.io/badge/dockerfile-augustoliks/ws--inventory:latest-blue.svg)](https://hub.docker.com/r/augustoliks/ws-inventory)
