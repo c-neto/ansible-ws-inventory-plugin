@@ -10,10 +10,11 @@
 
 Ansible Inventory Plugin, created to get hosts from HTTP API.
 
-Actual data source compatible:
+Features:
 
-- MongoDB;
-- Filesystem (JSON format).
+- Database compatible with MongoDB and Filesystem (JSON format);
+- Import inventory with .CSV file format;
+- Export inventory with .CSV file format.
 
 ## Diagram
 
@@ -102,7 +103,7 @@ Source code was made in Python. The configuration app, using a library [dynaconf
     "LOG_LEVEL": "DEBUG",
     "DB_DRIVER": "mongodb",
     "DB_OPTS": {
-      "url": "mongodb://root:root@127.0.0.1:27017"
+      "url": "mongodb://root:root@mongodb:27017"
     }
   }
 }
