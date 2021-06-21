@@ -12,6 +12,12 @@ jobs:
       - run: sudo apt update -y
       - run: sudo apt install python3-virtualenv make -y
 
+      - name: "add version to galaxy colection"
+        run: sed -i -e "s/{{ TAG-VERSION }}/$RELEASE_VERSION/g" ansible-plugin/ws/galaxy.yml
+
+      - name: "check galaxy colection"
+        run: cat ansible-plugin/ws/galaxy.yml
+
       - name: "create virtualenv"
         run: make venv
 
@@ -23,3 +29,4 @@ jobs:
 
 env:
   TOKEN_GALAXY: ${{ secrets.TOKEN_GALAXY }}
+  RELEASE_VERSION: ${{ env.RELEASE_VERSION }}
