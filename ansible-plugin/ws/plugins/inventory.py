@@ -8,7 +8,7 @@ plugin_type: inventory
 author:
     - Carlos Neto (carlos.neto.dev@gmail.com)
 short_description: Get Inventory from HTTP API
-version_added: 0.0.1
+version_added: 1.0.1
 description:
     - Zabbix Inventory plugin
     - All vars from zabbix are prefixed with zbx_

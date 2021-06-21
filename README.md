@@ -153,11 +153,11 @@ docker-compose up -d
 
 - Insert hosts:
 
-![](.docs/swagger-insert-host.jpg)
+<img src=".docs/swagger-insert-host.jpg" alt="drawing" width="200"/>
 
 - List hosts:
 
-![](.docs/swagger-list-hosts)
+<img src=".docs/swagger-list-hosts.jpg" alt="drawing" width="200"/>
 
 - Check `playbook-main.yml` properties:
 
