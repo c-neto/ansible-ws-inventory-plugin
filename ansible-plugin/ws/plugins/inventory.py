@@ -1,4 +1,4 @@
-from ansible.plugins.inventory import BaseInventoryPlugin
+from ansible.plugins.inventory import BaseInventoryPlugin, Constructable
 import requests
 
 
@@ -8,7 +8,7 @@ plugin_type: inventory
 author:
     - Carlos Neto (carlos.neto.dev@gmail.com)
 short_description: Get Inventory from HTTP API
-version_added: 1.0.1
+version_added: 1.0.3
 description:
     - Zabbix Inventory plugin
     - All vars from zabbix are prefixed with zbx_
@@ -30,7 +30,7 @@ options:
 '''
 
 
-class InventoryModule(BaseInventoryPlugin):
+class InventoryModule(BaseInventoryPlugin, Constructable):
 
     NAME = 'inventory'
 
@@ -52,7 +52,10 @@ class InventoryModule(BaseInventoryPlugin):
         response.raise_for_status()
 
         for host in response.json():
+            self.inventory.add_group(host['group'])
+
             self.inventory.add_host(host['host_name'], group=host['group'])
+
             self.inventory.set_variable(
                 host['host_name'],
                 'location',

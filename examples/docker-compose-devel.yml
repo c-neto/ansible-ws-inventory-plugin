@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+      - ws-inventory:/data/
+    # ports:
+    #   - 27017:27017
+
+  http-server-api:
+    depends_on: 
+      - mongodb
+    build: 
+      context: ../http-server-api/
+      dockerfile: Dockerfile
+    container_name: http-server-api
+    restart: always
+    environment:
+      CONFIG_FILE: /app/settings.json
+      ENV_FOR_DYNACONF: mongodb
+      # ENV_FOR_DYNACONF: filesystem
+    volumes:
+      - ./settings.json:/app/settings.json:ro
+    ports:
+      - 5000:5000
+
+volumes:
+  ws-inventory:

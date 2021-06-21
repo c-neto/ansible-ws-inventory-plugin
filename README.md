@@ -183,6 +183,13 @@ api_endpoint: "http://127.0.0.1:5000/read/hosts"
 timeout: 10
 ```
 
+- Test plugin
+
+```bash
+$ ansible-inventory -i ws-inventory.yml --graph
+$ ansible-inventory -i ws-inventory.yml --list
+```
+
 - Run playbook
 
 ```bash

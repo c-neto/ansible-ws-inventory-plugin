@@ -16,7 +16,7 @@
     "LOG_LEVEL": "DEBUG",
     "DB_DRIVER": "mongodb",
     "DB_OPTS": {
-      "url": "mongodb://root:root@127.0.0.1:27017"
+      "url": "mongodb://root:root@mongodb:27017"
     }
   }
 }
