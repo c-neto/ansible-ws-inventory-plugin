@@ -9,7 +9,7 @@ class RepoHost(manager.DBHost):
     def __init__(self, file: str):
         self.file = Path(file)
         if not self.file.exists():
-            self.file.write_text('[]')
+            self.file.write_text(json.dumps([]))
 
     async def connect_to_database(self):
         pass
@@ -24,12 +24,13 @@ class RepoHost(manager.DBHost):
     async def get_host_by_host_name(self, host_name: str) -> schemas.Host:
         hosts_json = json.loads(self.file.read_text())
         hosts = [schemas.Host(**host) for host in hosts_json]
-        host = list(filter(lambda v: v.host_name == host_name, hosts))[0]
 
-        if host:
-            return host
-        else:
+        hosts = list(filter(lambda v: v.host_name == host_name, hosts))
+
+        if not hosts:
             raise ValueError('host not found')
+
+        return hosts[0]
 
     async def delete_host_by_host_name(self, host_name: str):
         hosts_json = json.loads(self.file.read_text())
@@ -43,5 +44,5 @@ class RepoHost(manager.DBHost):
         hosts = [schemas.Host(**host) for host in hosts_json]
         hosts_reduced = list(filter(lambda v: v.host_name != host.host_name, hosts))
         hosts_reduced.append(host)
-        hosts_json_with_new_object = json.dumps(hosts_reduced)
+        hosts_json_with_new_object = json.dumps([host.dict() for host in hosts_reduced])
         self.file.write_text(hosts_json_with_new_object)
