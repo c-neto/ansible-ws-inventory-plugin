@@ -74,7 +74,11 @@ ansible-playbook -i ws-iventory.yml main.yml
 
 ## Configure HTTP Server API
 
-[http-server-api](./http-server-api)
+Webserver Source code is in the [http-server-api/](./http-server-api) directory. 
+
+Application wrapped in Container Image format, but it can be runs a system wide, with [systemd](https://github.com/systemd/systemd) or [sysvinit](https://wiki.debian.org/Debate/initsystem/sysvinit) etc.
+
+Source code was made in Python. The configuration app, using a library [dynaconf](https://github.com/rochacbruno/dynaconf), for provides multiple formats to configure properties of project. For default, configuration was made in JSON file format, but it could be made from any other source and format compatible with a configuration library. 
 
 ```json
 {
@@ -100,3 +104,17 @@ ansible-playbook -i ws-iventory.yml main.yml
   }
 }
 ```
+
+- `ENV_FOR_DYNACONF`: Select high level set properties. Options available: `mongodb`, `filesystem`;
+- `BIND_ADDRESS`: Bind of HTTP Server address uvicorn;
+- `BIND_PORT`: Port of HTTP Server uvicorn;
+- `LOG_LEVEL`: Log of application. Levels available: `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`;
+- `URI_ROOT_PATH`: Base URI path routes of webserver (util in reverse proxys servers `nginx`, `apache`, `traefix`);
+- `DB_DRIVER`: Persistence Tecnology. This option choosed, change properties of `DB_OPTS` properties. Technologies available: `mongodb`, `filesystem`
+- `DB_OPTS`: Properties access Persist Layer:
+
+>  - mongodb:
+>    - `url`: URL with basic-auth to access mongodb instance
+
+>  - filesystem: 
+>    - `file`: Path of file which will be used with database.
