@@ -48,8 +48,6 @@ collections:
 
 ### Usage
 
-*Example present in [./examples/](./examples) directory* 
-
 Create inventory file `ws-iventory.yml`, and configure follow options:
 
 ```yml
@@ -64,7 +62,6 @@ timeout: 10
 Run Ansible playbook with `ws-iventory.yml` inventory.
 
 ```bash
-cd examples/
 ansible-playbook -i ws-iventory.yml main.yml 
 ```
 
