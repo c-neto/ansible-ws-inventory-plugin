@@ -7,6 +7,8 @@ Actual data source compatible:
 - MongoDB;
 - Filesystem (JSON format)
 
+## Diagram
+
 ![diagram](/.docs/diagram.png)
 
 ## Configure Ansible Inventory Plugin: augustoliks.ws
