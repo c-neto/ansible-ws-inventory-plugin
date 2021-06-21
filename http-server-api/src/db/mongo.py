@@ -30,11 +30,12 @@ class RepoHost(manager.DBHost):
         logging.info("Closed connection with MongoDB")
 
     async def get_hosts(self) -> List[schemas.Host]:
-        return [schemas.Host(**host) async for host in self._db.hosts.find()]
+        hosts = [schemas.Host(**host) async for host in self._db.hosts.find()]
+        return hosts
 
     async def get_host_by_group(self, group: str) -> List[schemas.Host]:
-        hosts = self._db.hosts.find({'group': group})
-        return [schemas.Host(**host) async for host in hosts]
+        hosts = [schemas.Host(**host) async for host in self._db.hosts.find({'group': group})]
+        return hosts
 
     async def get_host_by_host_name(self, host_name: str) -> schemas.Host:
         host_q = await self._db.hosts.find_one({'host_name': host_name})

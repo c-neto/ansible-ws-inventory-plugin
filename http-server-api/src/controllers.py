@@ -45,13 +45,13 @@ def routes_host(app: FastAPI):
     async def get_hosts(db_host: manager.DBHost = Depends(db.get_connection)):
         return await db_host.get_hosts()
 
+    @app.get('/read/hosts/group/{group}', response_model=List[schemas.Host])
+    async def get_host(group: str, db_host: manager.DBHost = Depends(db.get_connection)):
+        return await db_host.get_host_by_group(group)
+
     @app.get('/read/host/{host_name}', response_model=schemas.Host)
     async def get_host(host_name: str, db_host: manager.DBHost = Depends(db.get_connection)):
         return await db_host.get_host_by_host_name(host_name)
-
-    @app.get('/read/host/group/{group}', response_model=schemas.Host)
-    async def get_host(group: str, db_host: manager.DBHost = Depends(db.get_connection)):
-        return await db_host.get_host_by_group(group)
 
     @app.post('/upsert/host', response_model=str, status_code=status.HTTP_200_OK)
     async def upsert_host(host: schemas.Host, db_host: manager.DBHost = Depends(db.get_connection)):
