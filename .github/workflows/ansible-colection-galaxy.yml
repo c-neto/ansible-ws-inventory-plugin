@@ -1,0 +1,25 @@
+name: Build and publish Ansible-Colection to Galaxy
+
+on:
+  push:
+    branches:
+      - tag
+
+jobs:
+  build-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt update -y
+      - run: sudo apt install python3-virtualenv make -y
+
+      - name: "create virtualenv"
+        run: make venv
+
+      - name: "build galaxy omprog"
+        run: make build
+
+      - name: "build galaxy omprog"
+        run: make publish token=$TOKEN_GALAXY
+
+env:
+  TOKEN_GALAXY: ${{ secrets.TOKEN_GALAXY }}
