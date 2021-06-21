@@ -1,5 +1,5 @@
+from typing import List
 import schemas
-import typing
 import abc
 
 
@@ -15,7 +15,7 @@ class DBConnection:
 
 class DBHost(DBConnection):
     @abc.abstractmethod
-    async def get_hosts(self) -> typing.List[schemas.Host]:
+    async def get_hosts(self) -> List[schemas.Host]:
         pass
 
     @abc.abstractmethod
@@ -23,7 +23,11 @@ class DBHost(DBConnection):
         pass
 
     @abc.abstractmethod
-    async def get_host_by_host_name(self, host_name) -> schemas.Host:
+    async def get_host_by_host_name(self, host_name: str) -> schemas.Host:
+        pass
+
+    @abc.abstractmethod
+    async def get_host_by_group(self, group: str) -> List[schemas.Host]:
         pass
 
     @abc.abstractmethod

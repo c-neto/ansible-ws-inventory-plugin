@@ -52,7 +52,7 @@ class InventoryModule(BaseInventoryPlugin):
         response.raise_for_status()
 
         for host in response.json():
-            self.inventory.add_host(host['host_name'])
+            self.inventory.add_host(host['host_name'], group=host['group'])
             self.inventory.set_variable(
                 host['host_name'],
                 'location',

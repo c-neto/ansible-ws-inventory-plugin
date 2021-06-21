@@ -1,12 +1,18 @@
+import logging
 from typing import List
+from datetime import datetime
 
 import uvicorn
+import converter
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
 from fastapi import (
     FastAPI,
     status,
-    Depends
+    Response,
+    Depends,
+    File,
+    UploadFile
 )
 
 from conf import settings
@@ -39,17 +45,45 @@ def routes_host(app: FastAPI):
     async def get_hosts(db_host: manager.DBHost = Depends(db.get_connection)):
         return await db_host.get_hosts()
 
-    @app.get('/read/host/{hostname}', response_model=schemas.Host)
-    async def get_host(hostname: str, db_host: manager.DBHost = Depends(db.get_connection)):
-        return await db_host.get_host_by_host_name(hostname)
+    @app.get('/read/host/{host_name}', response_model=schemas.Host)
+    async def get_host(host_name: str, db_host: manager.DBHost = Depends(db.get_connection)):
+        return await db_host.get_host_by_host_name(host_name)
 
-    @app.post('/upsert/host', response_model=schemas.Host, status_code=status.HTTP_200_OK)
+    @app.get('/read/host/group/{group}', response_model=schemas.Host)
+    async def get_host(group: str, db_host: manager.DBHost = Depends(db.get_connection)):
+        return await db_host.get_host_by_group(group)
+
+    @app.post('/upsert/host', response_model=str, status_code=status.HTTP_200_OK)
     async def upsert_host(host: schemas.Host, db_host: manager.DBHost = Depends(db.get_connection)):
         await db_host.upsert_host(host)
+        logging.debug(f'host created | {host}')
+        return PlainTextResponse(f"host {host.host_name} update/created with successful")
 
-    @app.post('/delete/host/host_name/{host_name}', response_model=schemas.Host, status_code=status.HTTP_200_OK)
+    @app.post('/delete/host/host_name/{host_name}', response_model=str, status_code=status.HTTP_200_OK)
     async def delete_host(host_name: str, db_host: manager.DBHost = Depends(db.get_connection)):
         await db_host.delete_host_by_host_name(host_name)
+        logging.debug(f'host deleted | {host_name}')
+        return PlainTextResponse(f"host {host_name} deleted with successful")
+
+    @app.post('/import/hosts', response_model=schemas.Host)
+    async def import_hosts(db_host: manager.DBHost = Depends(db.get_connection), file: UploadFile = File(...)):
+        file_bytes = await file.read()
+        csv_content = file_bytes.decode('utf-8')
+        hosts = converter.read_csv(csv_content)
+        for host in hosts:
+            await db_host.upsert_host(host)
+            logging.debug(f'host created | {host}')
+
+    @app.get('/export/hosts', response_model=schemas.Host)
+    async def export_hosts(db_host: manager.DBHost = Depends(db.get_connection)):
+        hosts = await db_host.get_hosts()
+        csv_memory_file = converter.generate_csv(hosts)
+
+        response = Response(content=csv_memory_file.getvalue(), media_type="text/csv")
+        dt_now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+        response.headers["Content-Disposition"] = f"attachment; filename=list-equips-{dt_now}.csv"
+
+        return response
 
 
 def run():

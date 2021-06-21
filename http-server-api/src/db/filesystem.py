@@ -11,12 +11,6 @@ class RepoHost(manager.DBHost):
         if not self.file.exists():
             self.file.write_text(json.dumps([]))
 
-    async def connect_to_database(self):
-        pass
-
-    async def close_database_connection(self):
-        pass
-
     async def get_hosts(self) -> List[schemas.Host]:
         hosts = json.loads(self.file.read_text())
         return [schemas.Host(**host) for host in hosts]
@@ -31,6 +25,17 @@ class RepoHost(manager.DBHost):
             raise ValueError('host not found')
 
         return hosts[0]
+
+    async def get_host_by_group(self, group: str) -> List[schemas.Host]:
+        hosts_json = json.loads(self.file.read_text())
+        hosts = [schemas.Host(**host) for host in hosts_json]
+
+        hosts = list(filter(lambda v: v.group == group, hosts))
+
+        if not hosts:
+            raise ValueError('hosts not found')
+
+        return hosts
 
     async def delete_host_by_host_name(self, host_name: str):
         hosts_json = json.loads(self.file.read_text())

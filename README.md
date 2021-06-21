@@ -43,7 +43,7 @@ You can also include it in a `requirements.yml` file and install it via `ansible
 ---
 collections:
   - name: augustoliks.ws
-    version: 1.0.0
+    version: 1.0.3
 ```
 
 ### Usage

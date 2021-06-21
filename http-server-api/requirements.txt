@@ -3,3 +3,4 @@ pydantic
 dynaconf
 motor
 uvicorn
+python-multipart

@@ -10,3 +10,4 @@ class Location(pydantic.BaseModel):
 class Host(pydantic.BaseModel):
     host_name: str
     location: Location
+    group: str
