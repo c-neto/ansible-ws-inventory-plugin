@@ -1,4 +1,5 @@
 [![Build Dockerfile](https://github.com/augustoliks/ansible-ws-inventory-plugin/actions/workflows/docker-http-server.yml/badge.svg?branch=main)](https://github.com/augustoliks/ansible-ws-inventory-plugin/actions/workflows/docker-http-server.yml)
+
 [![Docker Pulls](https://img.shields.io/docker/pulls/augustoliks/ws-inventory.svg)](https://hub.docker.com/r/augustoliks/ws-inventory/)
 [![augustoliks/ws-inventory](https://img.shields.io/badge/dockerfile-augustoliks/ws--inventory:latest-blue.svg)](https://hub.docker.com/r/augustoliks/ws-inventory)
 [![augustoliks/ws-inventory](https://img.shields.io/badge/ansible--galaxy-augustoliks.ws-blue.svg)](https://galaxy.ansible.com/augustoliks/ws)
@@ -41,7 +42,9 @@ collections:
     version: 1.0.0
 ```
 
-### How To Use
+### Usage
+
+*Example present in [./examples/](./examples) directory* 
 
 Create inventory file `ws-iventory.yml`, and configure follow options:
 
@@ -62,3 +65,9 @@ Run Ansible playbook with `ws-iventory.yml` inventory.
 cd examples/
 ansible-playbook -i ws-iventory.yml main.yml 
 ```
+
+---
+
+## Configure HTTP Server API
+
+[http-server-api](./http-server-api)

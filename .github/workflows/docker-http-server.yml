@@ -1,4 +1,4 @@
-name: Build Dockerfile
+name: CICD Docker Hub
 
 on:
   push:
