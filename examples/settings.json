@@ -1,0 +1,22 @@
+{
+  "filesystem": {
+    "BIND_ADDRESS": "0.0.0.0",
+    "BIND_PORT": 5000,
+    "URI_ROOT_PATH": "/",
+    "LOG_LEVEL": "DEBUG",
+    "DB_DRIVER": "filesystem",
+    "DB_OPTS": {
+      "file": "/tmp/inventory.json"
+    }
+  },
+  "mongodb": {
+    "BIND_ADDRESS": "0.0.0.0",
+    "BIND_PORT": 5000,
+    "URI_ROOT_PATH": "/",
+    "LOG_LEVEL": "DEBUG",
+    "DB_DRIVER": "mongodb",
+    "DB_OPTS": {
+      "url": "mongodb://root:root@mongodb:27017"
+    }
+  }
+}

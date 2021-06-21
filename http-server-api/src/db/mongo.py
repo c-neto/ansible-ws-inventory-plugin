@@ -9,9 +9,7 @@ from db import manager
 
 
 class RepoHost(manager.DBHost):
-    def __init__(self, user: str, passwd: str, url: str):
-        self.user = user
-        self.passwd = passwd
+    def __init__(self, url: str):
         self.url = url
         self._client: AsyncIOMotorClient = None
         self._db: AsyncIOMotorDatabase = None

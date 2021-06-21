@@ -8,16 +8,18 @@
 
 # ansible-ws-inventory-plugin
 
-Dynamic inventory from HTTP API.
+Ansible Inventory Plugin, created to get hosts from HTTP API.
 
 Actual data source compatible:
 
 - MongoDB;
-- Filesystem (JSON format)
+- Filesystem (JSON format).
 
 ## Diagram
 
-![diagram](/.docs/diagram.png)
+<p align="center">
+  <img src=".docs/diagram.png" />
+</p>
 
 ## Configure Ansible Inventory Plugin: augustoliks.ws
 
@@ -73,3 +75,28 @@ ansible-playbook -i ws-iventory.yml main.yml
 ## Configure HTTP Server API
 
 [http-server-api](./http-server-api)
+
+```json
+{
+  "filesystem": {
+    "BIND_ADDRESS": "0.0.0.0",
+    "BIND_PORT": 5000,
+    "URI_ROOT_PATH": "/",
+    "LOG_LEVEL": "DEBUG",
+    "DB_DRIVER": "filesystem",
+    "DB_OPTS": {
+      "file": "/tmp/inventory.json"
+    }
+  },
+  "mongodb": {
+    "BIND_ADDRESS": "0.0.0.0",
+    "BIND_PORT": 5000,
+    "URI_ROOT_PATH": "/",
+    "LOG_LEVEL": "DEBUG",
+    "DB_DRIVER": "mongodb",
+    "DB_OPTS": {
+      "url": "mongodb://root:root@127.0.0.1:27017"
+    }
+  }
+}
+```
