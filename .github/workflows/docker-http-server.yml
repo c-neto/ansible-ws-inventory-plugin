@@ -1,0 +1,15 @@
+name: Build Dockerfile
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl $TRIGGER_URL_DOCKER_HUB
+
+env:
+  TRIGGER_URL_DOCKER_HUB: ${{ secrets.TRIGGER_URL_DOCKER_HUB }}
