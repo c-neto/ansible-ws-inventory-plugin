@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        run: echo $GITHUB_REF - ${GITHUB_REF/refs\/tags\//}
       
-      - name: check version
-        run: echo $VERSION
+      - name: check tag version
+        run: echo $TAG_VERSION
 
       - name: update repos
         run: sudo apt update -y
@@ -43,4 +43,5 @@ jobs:
 
 env:
   TOKEN_GALAXY: ${{ secrets.TOKEN_GALAXY }}
+  TAG_VERSION: ${GITHUB_REF/refs\/tags\//}
 
