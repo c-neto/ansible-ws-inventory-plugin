@@ -27,7 +27,7 @@ jobs:
       - run: ls -R
 
       - name: "add version to galaxy colection"
-        run: sed -i -e "s/{{ TAG-VERSION }}/$VERSION/g" ./ansible-plugin/ws/galaxy.yml
+        run: sed -i -e "s/{{ TAG-VERSION }}/$TAG_VERSION/g" ./ansible-plugin/ws/galaxy.yml
 
       - name: "check galaxy colection"
         run: cat ansible-plugin/ws/galaxy.yml
@@ -38,7 +38,7 @@ jobs:
       - name: "build galaxy omprog"
         run: make build
 
-      - name: "build galaxy omprog"
+      - name: "publish galaxy omprog"
         run: make publish token=$TOKEN_GALAXY
 
 env:
