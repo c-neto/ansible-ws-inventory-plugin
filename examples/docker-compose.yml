@@ -10,8 +10,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
       - ws-inventory:/data/
-  #  ports:
-  #    - 27017:27017
+    # ports:
+    #   - 27017:27017
 
   http-server-api:
     image: augustoliks/ws-inventory:latest
@@ -25,6 +25,7 @@ services:
       - ./settings.json:/app/settings.json:ro
     ports:
       - 5000:5000
+    
 
 volumes:
   ws-inventory:
