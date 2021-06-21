@@ -2,6 +2,11 @@
 
 Dynamic inventory from HTTP API.
 
+Actual data source compatible:
+
+- MongoDB;
+- Filesystem (JSON format)
+
 ![diagram](/.docs/diagram.png)
 
 ## Configure Ansible Inventory Plugin: augustoliks.ws
@@ -14,13 +19,13 @@ pip3 install requests
 
 ### Installing the Collection from Ansible Galaxy
 
-Before using the Zabbix collection, you need to install it with the Ansible Galaxy CLI:
+Before using the `augustoliks.ws` collection, you need to install it with the Ansible Galaxy CLI:
 
 ```bash
 ansible-galaxy collection install augustoliks.ws
 ```
 
-You can also include it in a requirements.yml file and install it via `ansible-galaxy collection install -r requirements.yml`, using the format:
+You can also include it in a `requirements.yml` file and install it via `ansible-galaxy collection install -r requirements.yml`, using the format:
 
 ```bash
 ---
