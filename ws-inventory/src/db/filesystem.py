@@ -36,7 +36,7 @@ class RepoHost(manager.DBHost):
         hosts_json = json.loads(self.file.read_text())
         hosts = [schemas.Host(**host) for host in hosts_json]
         hosts_reduced = list(filter(lambda v: v.host_name != host_name, hosts))
-        hosts_json_without_object_delete = json.dumps([host.json() for host in hosts_reduced])
+        hosts_json_without_object_delete = json.dumps([host.dict() for host in hosts_reduced])
         self.file.write_text(hosts_json_without_object_delete)
 
     async def upsert_host(self, host: schemas.Host):

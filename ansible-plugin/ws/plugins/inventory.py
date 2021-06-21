@@ -1,4 +1,5 @@
 from ansible.plugins.inventory import BaseInventoryPlugin
+import requests
 
 
 DOCUMENTATION = '''
@@ -13,6 +14,7 @@ description:
     - All vars from zabbix are prefixed with zbx_
 requirements:
     - "python >= 3.4"
+    - "requirements"
 options:
     username:
         description:
@@ -29,7 +31,7 @@ options:
             - The timeout of API request (seconds).
         type: int
         default: 10
-    ws_url:
+    api_endpoint:
       description:
        - URL of web service HTTP API
       type: bool
@@ -39,7 +41,7 @@ options:
 
 class InventoryModule(BaseInventoryPlugin):
 
-    NAME = 'ws_inventory'
+    NAME = 'inventory'
 
     def verify_file(self, path: str):
         """return true/false if this is possibly a valid file for this plugin to consume"""
@@ -55,21 +57,13 @@ class InventoryModule(BaseInventoryPlugin):
         super(InventoryModule, self).parse(inventory, loader, path, cache)
         config = self._read_config_data(path)
 
-        hosts = [
-            {
-                'host_name': 'localhost',
-                'localization': {
-                    "address": "rua x, 6661",
-                    "latitude": 0.0,
-                    "longitude": 0.0
-                }
-            }
-        ]
+        response = requests.get(config['api_endpoint'])
+        response.raise_for_status()
 
-        for host in hosts:
+        for host in response.json():
             self.inventory.add_host(host['host'])
             self.inventory.set_variable(
                 host['host_name'],
-                'localization',
-                host['localization']
+                'location',
+                host['location']
             )
