@@ -1,4 +1,4 @@
-name: CICD Docker Hub
+name: Build Dockerfile
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
   build-latest:
     runs-on: ubuntu-latest
     steps:
-      - run: curl $TRIGGER_URL_DOCKER_HUB
+      - run: curl -XPOST $TRIGGER_URL_DOCKER_HUB
 
 env:
   TRIGGER_URL_DOCKER_HUB: ${{ secrets.TRIGGER_URL_DOCKER_HUB }}
