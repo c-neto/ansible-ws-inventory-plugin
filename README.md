@@ -126,3 +126,16 @@ Source code was made in Python. The configuration app, using a library [dynaconf
 
   - filesystem: 
     - `file`: Path of file which will be used with database.
+
+## Example Complete
+
+```bash
+cd example/
+virtualenv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+ansible-galaxy collection install -r requirements.yml
+docker-compose pull
+docker-compose up -d
+ansible-playbook -i ws-inventory.yml playbook-main.yml
+```
