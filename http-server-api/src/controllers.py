@@ -9,7 +9,7 @@ from fastapi import (
     Depends
 )
 
-import os
+from conf import settings
 import schemas
 import db
 from db import manager
@@ -53,7 +53,7 @@ def routes_host(app: FastAPI):
 
 
 def run():
-    app = FastAPI(root_path=os.getenv('ROOT_PATH', "/"))
+    app = FastAPI(root_path=settings['URI_ROOT_PATH'])
     app.add_middleware(
         CORSMiddleware,
         allow_origins=['*'],
@@ -68,7 +68,7 @@ def run():
 
     uvicorn.run(
         app,
-        host=os.getenv('BIND_ADDRESS', '0.0.0.0'),
-        port=os.getenv('BIND_PORT', 5000),
+        host=settings['BIND_ADDRESS'],
+        port=settings['BIND_PORT'],
         log_config=None
     )

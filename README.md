@@ -4,13 +4,15 @@ Dynamic inventory from HTTP API.
 
 ![diagram](/.docs/diagram.png)
 
-## Requirements
+## Configure Ansible Inventory Plugin: augustoliks.ws
+
+### Requirements
 
 ```bash
 pip3 install requests
 ```
 
-## Installing the Collection from Ansible Galaxy
+### Installing the Collection from Ansible Galaxy
 
 Before using the Zabbix collection, you need to install it with the Ansible Galaxy CLI:
 
@@ -27,18 +29,24 @@ collections:
     version: 1.0.0
 ```
 
-## How To Use
+### How To Use
 
-Create `ws-iventory.yml` file, and configure follow options:
+Create inventory file `ws-iventory.yml`, and configure follow options:
 
 ```shell
+# Plugin Name
 plugin: augustoliks.ws.inventory
+
+# Plugin Options
 api_endpoint: 'http://127.0.0.1:8000/hosts'
+username: ""
+password: ""
+timeout: 10
 ```
 
-## Examples
+Run Ansible playbook with `ws-iventory.yml` inventory.
 
 ```bash
 cd examples/
-ansible-playbook -i ws-inventory.yml main.yml 
+ansible-playbook -i ws-iventory.yml main.yml 
 ```
