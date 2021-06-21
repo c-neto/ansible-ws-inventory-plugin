@@ -22,7 +22,7 @@ jobs:
       - name: install build deps
         run: sudo apt install python3-virtualenv make tree -y
 
-      - run: tree .
+      - run: ls -R
 
       - name: "add version to galaxy colection"
         run: sed -i -e "s/{{ TAG-VERSION }}/$VERSION/g" ./ansible-plugin/ws/galaxy.yml
