@@ -39,7 +39,7 @@ ansible-galaxy collection install augustoliks.ws
 
 You can also include it in a `requirements.yml` file and install it via `ansible-galaxy collection install -r requirements.yml`, using the format:
 
-```bash
+```yml
 ---
 collections:
   - name: augustoliks.ws
@@ -52,7 +52,7 @@ collections:
 
 Create inventory file `ws-iventory.yml`, and configure follow options:
 
-```shell
+```yml
 # Plugin Name
 plugin: augustoliks.ws.inventory
 
