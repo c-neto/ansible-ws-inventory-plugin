@@ -4,7 +4,7 @@
 [![augustoliks/ws-inventory](https://img.shields.io/badge/dockerfile-augustoliks/ws--inventory:latest-blue.svg)](https://hub.docker.com/r/augustoliks/ws-inventory)
 [![Docker Pulls](https://img.shields.io/docker/pulls/augustoliks/ws-inventory.svg)](https://hub.docker.com/r/augustoliks/ws-inventory/)
 
-[![augustoliks/ws-inventory](https://img.shields.io/badge/ansible--galaxy-augustoliks.ws-blue.svg)](https://galaxy.ansible.com/augustoliks/ws)
+[![augustoliks/ws-inventory](https://img.shields.io/badge/ansible--galaxy-augustoliks.ws-green.svg)](https://galaxy.ansible.com/augustoliks/ws)
 
 # ansible-ws-inventory-plugin
 
