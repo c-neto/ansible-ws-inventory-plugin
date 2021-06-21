@@ -9,11 +9,15 @@ jobs:
   build-latest:
     runs-on: ubuntu-latest
     steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
       - run: sudo apt update -y
       - run: sudo apt install python3-virtualenv make -y
 
       - name: "add version to galaxy colection"
-        run: sed -i -e "s/{{ TAG-VERSION }}/$RELEASE_VERSION/g" ansible-plugin/ws/galaxy.yml
+        run: sed -i -e "s/{{ TAG-VERSION }}/$VERSION/g" ansible-plugin/ws/galaxy.yml
 
       - name: "check galaxy colection"
         run: cat ansible-plugin/ws/galaxy.yml
