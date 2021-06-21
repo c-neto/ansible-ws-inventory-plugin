@@ -1,4 +1,4 @@
-plugin: "inventory"
+plugin: "augustoliks.ws.inventory"
 
 api_endpoint: "http://127.0.0.1:5000/read/hosts"
 timeout: 10
