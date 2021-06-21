@@ -1,9 +1,9 @@
 ---
 - hosts: all
-  remote_user: root
-  become_user: root
+  remote_user: augustoliks
+  become_user: augustoliks
   become: yes
-  gather_facts: True
+  gather_facts: False
 
   tasks:
     - ansible.builtin.debug:

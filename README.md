@@ -129,13 +129,89 @@ Source code was made in Python. The configuration app, using a library [dynaconf
 
 ## Example Complete
 
+- Enter [./examples/](./examples) directory: 
+
 ```bash
-cd example/
+cd examples/
+```
+
+- Install dependencies (require `virtualenv`):
+
+```bash
 virtualenv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
 ansible-galaxy collection install -r requirements.yml
+```
+
+- Provides `ws-inventory` and `mongodb` container instances:
+
+```bash
 docker-compose pull
 docker-compose up -d
-ansible-playbook -i ws-inventory.yml playbook-main.yml
+```
+
+- Insert hosts:
+
+![](.docs/swagger-insert-host.jpg)
+
+- List hosts:
+
+![](.docs/swagger-list-hosts)
+
+- Check `playbook-main.yml` properties:
+
+> :warning: `augustoliks` should be change with your system username.
+
+```bash
+$ cat playbook-main.yml                                                                                                     
+
+---
+- hosts: all
+  remote_user: augustoliks
+  become_user: augustoliks
+  become: yes
+  gather_facts: False
+
+  tasks:
+    - ansible.builtin.debug:
+        var: hostvars
+```
+
+- Check `ws-inventory.yml` properties:
+
+```bash
+$ cat ws-inventory.yml                                                                                                      
+
+plugin: "augustoliks.ws.inventory"
+api_endpoint: "http://127.0.0.1:5000/read/hosts"
+timeout: 10
+```
+
+- Run playbook
+
+```bash
+$ ansible-playbook -i ws-inventory.yml playbook-main.yml --ask-pass                                                         
+
+SSH password: 
+
+PLAY [all] ********************************************************************************************************************
+
+TASK [ansible.builtin.debug] **************************************************************************************************
+ok: [localhost] => {
+    "hostvars": {
+        "localhost": {
+            ...
+            "location": {
+                "address": "string",
+                "latitude": 35.1234,
+                "longitude": 10.1234
+            },
+            ...
+        }
+    }
+}
+
+PLAY RECAP ********************************************************************************************************************
+localhost                  : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0                                                                     
 ```

@@ -16,16 +16,6 @@ requirements:
     - "python >= 3.4"
     - "requirements"
 options:
-    username:
-        description:
-            - Username to access HTTP API.
-        type: str
-        required: true
-    password:
-        description:
-            - Password to access HTTP API.
-        type: str
-        required: true
     timeout:
         description:
             - The timeout of API request (seconds).
@@ -34,8 +24,9 @@ options:
     api_endpoint:
       description:
        - URL of web service HTTP API
-      type: bool
+      type: str
       default: false
+      required: true
 '''
 
 
